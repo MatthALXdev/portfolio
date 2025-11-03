@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Matthieu Alix - Développeur Fullstack - Portfolio de projets en production">
+    <meta name="author" content="Matthieu Alix">
+
+    <title>DevAlix - Matthieu Alix | Développeur Fullstack </title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sunrise-orange': '#E67451',
+                        'sunrise-blue': '#2B4C7E',
+                        'dawn-blue': '#5B8DBE',
+                        'sky-light': '#E8F1F8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-sunrise-blue">
+                        <span class="inline-block w-10 h-10 bg-gradient-to-br from-sunrise-orange to-dawn-blue rounded-lg flex items-center justify-center text-white">MA</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#projets" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Projets</a>
+                        <a href="#parcours" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Parcours</a>
+                        <a href="#competences" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Compétences</a>
+                        <a href="#contact" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-sunrise-orange focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="#projets" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Projets</a>
+                <a href="#parcours" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Parcours</a>
+                <a href="#competences" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Compétences</a>
+                <a href="#contact" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-20 bg-gradient-to-br from-sunrise-orange via-dawn-blue to-sunrise-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <!-- Photo Profile -->
+                <div class="mb-8">
+                    <img src="assets/20250902_181044-removebg-preview.png"
+                         alt="Matthieu Alix"
+                         class="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full bg-white/20 backdrop-blur-sm border-4 border-white object-cover shadow-xl">
+                </div>
+
+                <!-- Name & Title -->
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                    Matthieu Alix
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-6">
+                    Développeur Fullstack </p>
+                <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+                    En reconversion depuis la biologie moléculaire vers le développement web. Animé par la création de solutions fullstack en production.
+                </p>
+
+                <!-- Tech Badges -->
+                <div class="flex flex-wrap justify-center gap-3 mb-10">
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">Django</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">React</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">Docker</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">PostgreSQL</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">CI/CD</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">Nginx</span>
+                    <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium border border-white/30">Traefik</span>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projets" class="inline-block px-8 py-3 bg-white text-sunrise-blue rounded-lg font-semibold hover:bg-sky-light transition-colors shadow-lg">
+                        Voir mes projets
+                    </a>
+                    <a href="assets/cv-matthieu-alix.pdf" download class="inline-block px-8 py-3 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                        Télécharger CV
+                    </a>
+                </div>
+
+                <!-- Social Links -->
+                <div class="mt-10 flex justify-center gap-6">
+                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="text-white hover:text-sky-light transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/matthieu-alix" target="_blank" rel="noopener noreferrer" class="text-white hover:text-sky-light transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:matthieualix11@gmail.com" class="text-white hover:text-sky-light transition-colors">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projets Section -->
+    <section id="projets" class="py-20 bg-sky-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sunrise-blue mb-4">Mes Projets en Production</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Applications fullstack déployées avec HTTPS, tests automatisés et CI/CD
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Project Card: Pyx -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+                    <!-- Video placeholder -->
+                    <div class="bg-gradient-to-br from-sunrise-orange to-dawn-blue h-64 flex items-center justify-center">
+                        <p class="text-white text-sm opacity-75">Vidéo démo à ajouter</p>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-sunrise-blue mb-2">Pyx</h3>
+                        <p class="text-gray-600 mb-4">
+                            E-commerce de fonds d'écran numériques avec interface moderne Tailwind CSS. Parcours utilisateur complet du catalogue à la page de confirmation.
+                        </p>
+
+                        <!-- Stack Badges -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/django.svg" alt="" class="w-4 h-4">
+                                Django 5
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/postgresql.svg" alt="" class="w-4 h-4">
+                                PostgreSQL 16
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">
+                                Docker
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/tailwindcss.svg" alt="" class="w-4 h-4">
+                                Tailwind CSS
+                            </span>
+                        </div>
+
+                        <!-- Status Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🟢 HTTPS</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">🟡 Tests en cours</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="openProjectModal('pyx')" class="px-4 py-2 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">
+                                Voir détails
+                            </button>
+                            <a href="https://pyx.devamalix.fr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-white border-2 border-sunrise-blue text-sunrise-blue rounded-lg text-sm font-medium hover:bg-sky-light transition-colors">
+                                Démo live
+                            </a>
+                            <a href="https://github.com/MatthALXdev/dm" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                                GitHub
+                            </a>
+                        </div>
+
+                        <!-- QR Code (desktop only) -->
+                        <div class="hidden lg:block mt-6 pt-6 border-t border-gray-200">
+                            <p class="text-sm text-gray-600 mb-2">Scanner pour tester sur mobile :</p>
+                            <div class="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
+                                <span class="text-xs text-gray-500">QR à ajouter</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project Card: ReContent -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+                    <!-- Video placeholder -->
+                    <div class="bg-gradient-to-br from-dawn-blue to-sunrise-blue h-64 flex items-center justify-center">
+                        <p class="text-white text-sm opacity-75">Vidéo démo à ajouter</p>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-sunrise-blue mb-2">ReContent</h3>
+                        <p class="text-gray-600 mb-4">
+                            Outil IA de reformulation de contenu utilisant l'API Mistral AI. Interface React moderne pour réécrire et optimiser vos textes instantanément.
+                        </p>
+
+                        <!-- Stack Badges -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/react.svg" alt="" class="w-4 h-4">
+                                React 18
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/nodejs.svg" alt="" class="w-4 h-4">
+                                Node.js
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/mistralai.svg" alt="" class="w-4 h-4">
+                                Mistral AI
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">
+                                Docker
+                            </span>
+                        </div>
+
+                        <!-- Status Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🟢 HTTPS</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">🟡 Tests en cours</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="openProjectModal('recontent')" class="px-4 py-2 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">
+                                Voir détails
+                            </button>
+                            <a href="https://recontent.devamalix.fr" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-white border-2 border-sunrise-blue text-sunrise-blue rounded-lg text-sm font-medium hover:bg-sky-light transition-colors">
+                                Démo live
+                            </a>
+                            <a href="https://github.com/MatthALXdev/recontent" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                                GitHub
+                            </a>
+                        </div>
+
+                        <!-- QR Code (desktop only) -->
+                        <div class="hidden lg:block mt-6 pt-6 border-t border-gray-200">
+                            <p class="text-sm text-gray-600 mb-2">Scanner pour tester sur mobile :</p>
+                            <div class="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
+                                <span class="text-xs text-gray-500">QR à ajouter</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Parcours Section -->
+    <section id="parcours" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sunrise-blue mb-4">Mon Parcours</h2>
+                <p class="text-lg text-gray-600">De la biologie moléculaire au développement web</p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline">
+                <!-- 2025: Bachelor DevOps -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3 class="timeline-title">Bachelor DevOps Fullstack</h3>
+                        <p class="timeline-description">
+                            Formation en alternance recherchée. Spécialisation DevOps avec focus sur l'automatisation,
+                            le déploiement continu et l'infrastructure as code. Développement fullstack avec Django et React.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2025: Approvisionneur -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3 class="timeline-title">Approvisionneur</h3>
+                        <p class="timeline-description">
+                            Gestion des approvisionnements et coordination logistique. Développement de compétences
+                            en organisation, rigueur et gestion de données. Cette expérience a renforcé ma capacité
+                            à structurer des processus complexes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2024-2023: TP Développeur Web -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 - 2023</div>
+                        <h3 class="timeline-title">TP Développeur Web et Web Mobile</h3>
+                        <p class="timeline-description">
+                            Formation intensive en développement web. Maîtrise de Django, React, Docker, PostgreSQL.
+                            Réalisation de 3 projets fullstack déployés en production avec CI/CD : Pyx (e-commerce),
+                            ReContent (IA reformulation), et infrastructure mutualisée avec Traefik.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 2022-2021: R&D Evotec -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 2021</div>
+                        <h3 class="timeline-title">Technicien R&D - Evotec</h3>
+                        <p class="timeline-description">
+                            Recherche et développement en biologie moléculaire. Manipulation d'équipements de précision,
+                            analyse de données scientifiques et documentation rigoureuse. Environnement international
+                            avec collaboration en anglais.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2021-2017: Qualité BioMérieux -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 - 2017</div>
+                        <h3 class="timeline-title">Technicien Qualité - BioMérieux</h3>
+                        <p class="timeline-description">
+                            Contrôle qualité en biologie moléculaire dans une entreprise pharmaceutique. Respect des
+                            normes ISO, documentation stricte et méthodologie rigoureuse. Cette expérience a forgé
+                            mon approche méthodique du développement logiciel.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2016: BTS -->
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2016</div>
+                        <h3 class="timeline-title">BTS Bionanlyses et Contrôle</h3>
+                        <p class="timeline-description">
+                            Formation en Bionanlyses. Bases scientifiques solides en biochimie, biologie cellulaire et moléculaire,
+                            microbiologie et analyses instrumentales. Apprentissage de la rigueur scientifique et du
+                            respect des protocoles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences Section -->
+    <section id="competences" class="py-20 bg-sky-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sunrise-blue mb-4">Compétences Techniques</h2>
+                <p class="text-lg text-gray-600">Stack fullstack avec orientation DevOps</p>
+            </div>
+
+            <!-- Skill Grid -->
+            <div class="skill-grid">
+                <!-- Backend -->
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Django 5</li>
+                        <li>Node.js + Express</li>
+                        <li>PostgreSQL 16</li>
+                        <li>API REST</li>
+                        <li>ORM Django</li>
+                        <li>Gunicorn (WSGI)</li>
+                    </ul>
+                </div>
+
+                <!-- Frontend -->
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>React 18 + Vite</li>
+                        <li>Tailwind CSS</li>
+                        <li>HTML5 / CSS3</li>
+                        <li>JavaScript ES6+</li>
+                        <li>Responsive Design</li>
+                        <li>SPA (Single Page App)</li>
+                    </ul>
+                </div>
+
+                <!-- DevOps -->
+                <div class="skill-category">
+                    <h3>DevOps</h3>
+                    <ul>
+                        <li>Docker + Compose</li>
+                        <li>Nginx</li>
+                        <li>Traefik v3</li>
+                        <li>GitHub Actions (CI/CD)</li>
+                        <li>Linux Ubuntu</li>
+                        <li>Let's Encrypt (HTTPS)</li>
+                    </ul>
+                </div>
+
+                <!-- Tests & Outils -->
+                <div class="skill-category">
+                    <h3>Tests & Outils</h3>
+                    <ul>
+                        <li>pytest + coverage</li>
+                        <li>Jest (Node.js)</li>
+                        <li>Git / GitHub</li>
+                        <li>VS Code</li>
+                        <li>Chrome DevTools</li>
+                        <li>SSH / Terminal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Additional skills -->
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-bold text-sunrise-blue mb-6">Autres compétences</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Infrastructure as Code</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Reverse Proxy</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Secrets Management</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Monitoring</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Sécurité Web</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Firewall</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">VPS Management</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Documentation</span>
+                    <span class="px-4 py-2 bg-white text-sunrise-blue rounded-full text-sm font-medium shadow">Anglais technique</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Footer Section -->
+    <footer id="contact" class="py-12 bg-sunrise-blue text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Me Contacter</h3>
+                <p class="mb-2">Matthieu Alix - Développeur Fullstack Junior</p>
+                <p class="mb-6 text-white/80">Toulouse, France</p>
+
+                <div class="flex justify-center gap-6 mb-6">
+                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="hover:text-sunrise-orange transition-colors">GitHub</a>
+                    <a href="https://www.linkedin.com/in/matth-alx-dev" target="_blank" rel="noopener noreferrer" class="hover:text-sunrise-orange transition-colors">LinkedIn</a>
+                    <a href="mailto:matth.alx.dev+me@gmail.com" class="hover:text-sunrise-orange transition-colors">Email</a>
+                </div>
+
+                <p class="text-sm text-white/60">© 2025 Matthieu Alix - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+version: '3.8'
+
+# =====================================================
+# DevAlix Portfolio - Docker Compose (Production VPS)
+# =====================================================
+
+networks:
+  traefik-network:
+    external: true
+    name: traefik-network
+
+services:
+  portfolio:
+    build: .
+    container_name: devalix_portfolio
+    restart: unless-stopped
+
+    networks:
+      - traefik-network
+
+    labels:
+      # Activation Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-network"
+
+      # Router HTTP → HTTPS redirect
+      - "traefik.http.routers.portfolio-http.rule=Host(`me.devamalix.fr`)"
+      - "traefik.http.routers.portfolio-http.entrypoints=web"
+      - "traefik.http.routers.portfolio-http.middlewares=redirect-to-https"
+
+      # Router HTTPS
+      - "traefik.http.routers.portfolio.rule=Host(`me.devamalix.fr`)"
+      - "traefik.http.routers.portfolio.entrypoints=websecure"
+      - "traefik.http.routers.portfolio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.portfolio.service=portfolio"
+
+      # Service
+      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
+
+      # Middleware redirect HTTPS
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
