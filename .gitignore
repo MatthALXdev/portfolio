@@ -1,14 +1,14 @@
 # DevAlix Portfolio - .gitignore
 
-# Assets (will be added later)
-assets/demos/*.webm
-assets/demos/*.mp4
-assets/qr/*.png
-assets/architecture/*.png
-assets/screenshots/*.png
+# Assets - Now allowed in Git for deployment
+# assets/demos/*.webm
+# assets/demos/*.mp4
+# assets/qr/*.png
+# assets/architecture/*.png
+# assets/screenshots/*.png
 
-# Temporary CV (add actual CV manually)
-assets/cv-matthieu-alix.pdf
+# CV is now allowed in Git
+# assets/cv-matthieu-alix.pdf
 
 # OS files
 .DS_Store
