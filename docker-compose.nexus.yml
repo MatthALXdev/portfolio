@@ -30,9 +30,10 @@ services:
       - "traefik.docker.network=traefik-network"
 
       # Router HTTP (pas de HTTPS sur Nexus)
-      - "traefik.http.routers.portfolio-nexus.rule=Host(`me.nexus.local`)"
+      - "traefik.http.routers.portfolio-nexus.rule=Host(`me.nexus.local`) || PathPrefix(`/`)"
       - "traefik.http.routers.portfolio-nexus.entrypoints=web"
       - "traefik.http.routers.portfolio-nexus.service=portfolio-nexus"
+      - "traefik.http.routers.portfolio-nexus.priority=1"
 
       # Service
       - "traefik.http.services.portfolio-nexus.loadbalancer.server.port=80"

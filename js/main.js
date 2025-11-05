@@ -2,27 +2,6 @@
    DevAlix Portfolio - JavaScript
    ===================================================== */
 
-// Load Mermaid library dynamically
-(function() {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
-    script.onload = function() {
-        mermaid.initialize({
-            startOnLoad: false,
-            theme: 'default',
-            themeVariables: {
-                primaryColor: '#3b82f6',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#2563eb',
-                lineColor: '#64748b',
-                secondaryColor: '#f59e0b',
-                tertiaryColor: '#10b981'
-            }
-        });
-    };
-    document.head.appendChild(script);
-})();
-
 // Tech logos mapping
 const techLogos = {
     'Django 5.1': 'assets/logos/django.svg',
@@ -53,25 +32,26 @@ const projects = {
         ],
         stack: ["Django 5.1", "PostgreSQL 16", "Docker", "Tailwind CSS", "Gunicorn", "Nginx"],
         architecture: "Architecture Django classique avec base de données PostgreSQL isolée dans un réseau Docker interne. Les media files sont servis par nginx-static mutualisé pour des performances optimales. Traefik v3 gère le reverse proxy avec HTTPS automatique via Let's Encrypt.",
-        architectureMermaid: `flowchart LR
-    User([👤 User])
+        architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
+flowchart TD
+    User([👤 Utilisateur])
 
     subgraph VPS["☁️ VPS OVH"]
-        Traefik[🔀 Traefik<br/>HTTPS]
+        Traefik[🔀 Traefik<br/>Reverse Proxy<br/>HTTPS]
 
-        subgraph PyxStack["Pyx Shop"]
-            Django[⚙️ Django<br/>Gunicorn]
-            DB[(🗄️ PostgreSQL)]
+        subgraph PyxStack["📦 Pyx E-commerce"]
+            Django[⚙️ Django 5<br/>Gunicorn WSGI]
+            DB[(🗄️ PostgreSQL 16)]
         end
 
-        NginxStatic[📦 nginx-static<br/>Media]
+        NginxStatic[📁 nginx-static<br/>Fichiers Media]
     end
 
-    User -->|HTTPS| Traefik
-    Traefik --> Django
-    Traefik --> NginxStatic
-    Django --> DB
-    Django -.->|Upload| NginxStatic
+    User -->|Requête HTTPS| Traefik
+    Traefik -->|Route /| Django
+    Traefik -->|Route /media| NginxStatic
+    Django -->|SQL| DB
+    Django -.->|Upload fichiers| NginxStatic
 
     style Traefik fill:#2563eb,stroke:#1e40af,color:#fff,stroke-width:2px
     style Django fill:#092e20,stroke:#0c4b33,color:#fff,stroke-width:2px
@@ -90,9 +70,10 @@ const projects = {
         cicd: "Tests automatisés avec pytest (coverage 65%). GitHub Actions exécute les tests à chaque push sur les branches main et develop.",
         demoUrl: "https://pyx.devamalix.fr",
         githubUrl: "https://github.com/MatthALXdev/dm",
-        videoWebm: "assets/demos/pyx-demo.webm",
-        videoMp4: "assets/demos/pyx-demo.mp4",
-        architectureImg: "assets/architecture/pyx-architecture.png"
+        videoWebm: "assets/demos/pyx_demo.webm",
+        videoMp4: "assets/demos/pyx_demo.mp4",
+        screenshotImg: "assets/screenshots/pyx.png",
+        architectureImg: "assets/architecture/pyx-architecture.svg"
     },
     recontent: {
         title: "ReContent - Reformulation IA",
@@ -106,27 +87,28 @@ const projects = {
         ],
         stack: ["React 18", "Node.js", "Express", "Mistral AI", "Docker", "Vite", "Nginx"],
         architecture: "Architecture multi-conteneurs avec un frontend React servi par nginx et une API Node.js. Traefik route les requêtes selon le path (/api/recontent vers l'API). Communication sécurisée avec Mistral AI via clé API stockée dans variables d'environnement.",
-        architectureMermaid: `flowchart LR
-    User([👤 User])
+        architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
+flowchart TD
+    User([👤 Utilisateur])
 
     subgraph VPS["☁️ VPS OVH"]
-        Traefik[🔀 Traefik<br/>HTTPS]
+        Traefik[🔀 Traefik<br/>Reverse Proxy<br/>HTTPS]
 
-        subgraph Stack["ReContent"]
-            Frontend[📱 Frontend<br/>React]
-            API[⚙️ API<br/>Node.js]
+        subgraph Stack["📦 ReContent App"]
+            Frontend[📱 React 18<br/>SPA Frontend<br/>Nginx]
+            API[⚙️ API Node.js<br/>Express Server]
         end
     end
 
-    Mistral[🤖 Mistral AI]
-    Storage[(💾 LocalStorage)]
+    Mistral[🤖 Mistral AI<br/>API Externe]
+    Storage[(💾 LocalStorage<br/>Navigateur)]
 
-    User -->|HTTPS| Traefik
-    Traefik --> Frontend
-    Traefik --> API
-    Frontend -->|POST| API
-    API -->|Generate| Mistral
-    Frontend -.->|Save| Storage
+    User -->|Requête HTTPS| Traefik
+    Traefik -->|Route /| Frontend
+    Traefik -->|Route /api| API
+    Frontend -->|POST /api/recontent| API
+    API -->|Génération texte| Mistral
+    Frontend -.->|Sauvegarde locale| Storage
 
     style Traefik fill:#2563eb,stroke:#1e40af,color:#fff,stroke-width:2px
     style Frontend fill:#61dafb,stroke:#21a1c4,color:#000,stroke-width:2px
@@ -146,9 +128,10 @@ const projects = {
         cicd: "Tests automatisés avec Jest (coverage 60%). GitHub Actions exécute les tests API à chaque push. Validation de la conformité des endpoints.",
         demoUrl: "https://recontent.devamalix.fr",
         githubUrl: "https://github.com/MatthALXdev/recontent",
-        videoWebm: "assets/demos/recontent-demo.webm",
-        videoMp4: "assets/demos/recontent-demo.mp4",
-        architectureImg: "assets/architecture/recontent-architecture.png"
+        videoWebm: "assets/demos/recontent_demo.webm",
+        videoMp4: "assets/demos/recontent_demo.mp4",
+        screenshotImg: "assets/screenshots/recontent.png",
+        architectureImg: "assets/architecture/recontent-architecture.svg"
     }
 };
 
@@ -173,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Open project modal
-function openProjectModal(projectKey) {
+window.openProjectModal = function(projectKey) {
     const data = projects[projectKey];
     if (!data) return;
 
@@ -189,18 +172,16 @@ function openProjectModal(projectKey) {
 
     let bodyHTML = '';
 
-    // Video section
+    // Screenshot section with floating effect
     bodyHTML += `
-        <div class="modal-video">
-            <div class="bg-gradient-to-br from-sunrise-orange to-dawn-blue h-64 flex items-center justify-center rounded-lg">
-                <p class="text-white text-sm opacity-75">Vidéo démo à ajouter (${data.videoWebm})</p>
-            </div>
+        <div class="modal-screenshot-container">
+            <img src="${data.screenshotImg}" alt="${data.title} screenshot" class="modal-screenshot">
         </div>
     `;
 
     // Description
     bodyHTML += `
-        <h3>Description</h3>
+        <h3 style="margin-top: 3rem;">Description</h3>
         <p>${data.description}</p>
     `;
 
@@ -233,10 +214,15 @@ function openProjectModal(projectKey) {
     // Architecture
     bodyHTML += `
         <h3>Architecture</h3>
-        <div class="modal-architecture mb-4 bg-white p-4 rounded-lg border border-gray-200">
-            <pre class="mermaid" id="mermaid-${projectKey}">${data.architectureMermaid}</pre>
+        <p class="text-gray-700 mb-4">${data.architecture}</p>
+        <div class="modal-architecture mb-4">
+            <img src="${data.architectureImg}"
+                 alt="${data.title} architecture"
+                 class="architecture-img w-full h-auto rounded-lg border border-gray-200 cursor-pointer hover:opacity-90 transition-opacity"
+                 data-img-src="${data.architectureImg}"
+                 data-img-alt="${data.title} architecture">
+            <p class="text-xs text-gray-500 mt-2 text-center md:hidden">Cliquez pour agrandir</p>
         </div>
-        <p class="text-gray-700">${data.architecture}</p>
     `;
 
     // Security
@@ -269,32 +255,76 @@ function openProjectModal(projectKey) {
 
     document.getElementById('modal-body').innerHTML = bodyHTML;
 
+    // Add click event to architecture image
+    const archImg = document.querySelector('.architecture-img');
+    if (archImg) {
+        archImg.addEventListener('click', function() {
+            window.openImageLightbox(this.dataset.imgSrc, this.dataset.imgAlt);
+        });
+    }
+
     // Show modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-
-    // Render Mermaid diagram after DOM insertion
-    if (data.architectureMermaid) {
-        // Wait for mermaid to load and render
-        const renderMermaid = () => {
-            if (window.mermaid) {
-                setTimeout(() => {
-                    window.mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-                }, 100);
-            } else {
-                // Retry if mermaid not loaded yet
-                setTimeout(renderMermaid, 100);
-            }
-        };
-        renderMermaid();
-    }
 }
 
 // Close modal
-function closeModal() {
+window.closeModal = function() {
     const modal = document.getElementById('modal-project');
     if (modal) {
         modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Open image lightbox
+window.openImageLightbox = function(imageSrc, imageAlt) {
+    // Create lightbox if it doesn't exist
+    let lightbox = document.getElementById('image-lightbox');
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'image-lightbox';
+        lightbox.className = 'image-lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <button class="lightbox-close" onclick="closeImageLightbox()" aria-label="Fermer">✕</button>
+                <div class="lightbox-image-container">
+                    <img id="lightbox-image" src="" alt="" class="lightbox-image">
+                </div>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+
+        // Close on background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                closeImageLightbox();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeImageLightbox();
+            }
+        });
+    }
+
+    // Set image
+    const img = document.getElementById('lightbox-image');
+    img.src = imageSrc;
+    img.alt = imageAlt;
+
+    // Show lightbox
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close image lightbox
+window.closeImageLightbox = function() {
+    const lightbox = document.getElementById('image-lightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
 }

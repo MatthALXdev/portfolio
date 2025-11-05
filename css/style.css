@@ -20,18 +20,25 @@ html {
 }
 
 /* Modal Styles */
+dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: none;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    padding: 1rem;
+    padding: 0;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
@@ -43,7 +50,7 @@ html {
 }
 
 .modal-container {
-    background: white;
+    background: transparent;
     border-radius: 1rem;
     max-width: 900px;
     width: 100%;
@@ -52,6 +59,23 @@ html {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     transform: scale(0.9);
     transition: transform 0.3s ease;
+    position: relative;
+    padding: 0;
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Edge, Safari) */
+.modal-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.modal-container {
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE and Edge Legacy */
+.modal-container {
+    -ms-overflow-style: none;
 }
 
 .modal-overlay.active .modal-container {
@@ -100,6 +124,11 @@ html {
 
 .modal-body {
     padding: 2rem;
+    background: white;
+    position: relative;
+    z-index: 2;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .modal-body h3 {
@@ -141,18 +170,21 @@ html {
     font-weight: bold;
 }
 
-/* Video container in modal */
-.modal-video {
+/* Screenshot container in modal with floating effect */
+.modal-screenshot-container {
+    position: relative;
     width: 100%;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin-bottom: -3rem;
+    padding: 0;
+    z-index: 1;
 }
 
-.modal-video video {
+.modal-screenshot {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* Architecture image in modal */
@@ -220,6 +252,126 @@ html {
     border: 3px solid white;
     border-radius: 50%;
     box-shadow: 0 0 0 3px var(--sky-light);
+}
+
+/* Timeline branch marker (split) */
+.timeline-marker-split {
+    background: linear-gradient(135deg, #E67451 0%, #5B8DBE 100%);
+    width: 2rem;
+    height: 2rem;
+    left: -2.75rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 3px var(--sky-light), 0 0 20px rgba(230, 116, 81, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 6px var(--sky-light), 0 0 30px rgba(230, 116, 81, 0.5);
+    }
+}
+
+/* Branches wrapper */
+.branches-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .branches-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Branch cards */
+.branch {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: white;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.branch-primary {
+    border-color: var(--sunrise-orange);
+    background: linear-gradient(135deg, rgba(230, 116, 81, 0.05) 0%, rgba(91, 141, 190, 0.05) 100%);
+}
+
+.branch-secondary {
+    border-color: var(--dawn-blue);
+    background: linear-gradient(135deg, rgba(91, 141, 190, 0.05) 0%, rgba(43, 76, 126, 0.05) 100%);
+}
+
+.branch:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.branch-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.branch-primary .branch-badge {
+    background-color: var(--sunrise-orange);
+    color: white;
+}
+
+.branch-secondary .branch-badge {
+    background-color: var(--dawn-blue);
+    color: white;
+}
+
+.branch-title {
+    color: var(--sunrise-blue);
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.branch-subtitle {
+    color: var(--sunrise-orange);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.branch-description {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.branch-description li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.branch-description li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--sunrise-orange);
+    font-weight: bold;
+}
+
+.timeline-cta {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
 }
 
 .timeline-content {
@@ -357,6 +509,106 @@ html {
     color: #4b5563;
 }
 
+/* Image Lightbox */
+.image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.image-lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-image-container {
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+/* Mobile optimizations for lightbox */
+@media (max-width: 768px) {
+    .lightbox-image-container {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .lightbox-image {
+        max-width: none;
+        max-height: none;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+    }
+
+    .lightbox-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+    }
+}
+
 /* Print styles */
 @media print {
     nav {
@@ -364,6 +616,10 @@ html {
     }
 
     .modal-overlay {
+        display: none !important;
+    }
+
+    .image-lightbox {
         display: none !important;
     }
 
