@@ -15,7 +15,16 @@ const techLogos = {
     'Express': 'assets/logos/nodejs.svg',
     'Vite': 'assets/logos/vite.svg',
     'Gunicorn': 'assets/logos/gunicorn.svg',
-    'Nginx': 'assets/logos/nginx.svg'
+    'Nginx': 'assets/logos/nginx.svg',
+    'MySQL 8': 'assets/logos/mysql.svg',
+    'Python 3.12': 'assets/logos/python.svg',
+    'Vue 3': 'assets/logos/vuejs.svg',
+    'Vite': 'assets/logos/vite.svg',
+    'Pinia': 'assets/logos/pinia.svg',
+    'Sanity CMS': 'assets/logos/sanity.svg',
+    'Auth0': 'assets/logos/auth0.svg',
+    'Netlify': 'assets/logos/netlify.svg',
+    'Mapbox': 'assets/logos/mapbox.svg'
 };
 
 // Project data
@@ -132,6 +141,133 @@ flowchart TD
         videoMp4: "assets/demos/recontent_demo.mp4",
         screenshotImg: "assets/screenshots/recontent.png",
         architectureImg: "assets/architecture/recontent-architecture.svg"
+    },
+    feelback: {
+        title: "Feelback - Questionnaire de Satisfaction",
+        description: "Application collaborative de questionnaires de satisfaction pour les livraisons. Développée en équipe de 3 dans le cadre d'un projet scolaire EPSI. Mon rôle : DevOps (Docker, MySQL, workflow Git).",
+        features: [
+            "Questionnaire rapide avec 3 critères notés de 1 à 5 étoiles",
+            "Dashboard statistiques en temps réel avec moyennes",
+            "Système d'étoiles interactives et demi-étoiles pour les moyennes",
+            "Interface responsive mobile-first avec Tailwind CSS",
+            "Seeder de données pour génération de jeux de test",
+            "Interface admin Django pour gestion des avis"
+        ],
+        stack: ["Django 5.1", "Python 3.12", "MySQL 8", "Docker", "Tailwind CSS"],
+        architecture: "Architecture multi-conteneurs Docker avec séparation frontend/backend. Application Django conteneurisée communiquant avec une base MySQL isolée. Workflow GitFlow avec branches dev-infra, dev-back et dev-front pour une collaboration efficace en équipe de 3 développeurs.",
+        architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
+flowchart TD
+    User([👤 Utilisateur])
+
+    subgraph DockerCompose["🐳 Docker Compose"]
+        subgraph WebContainer["📦 Container Web"]
+            Django[⚙️ Django 5.1<br/>Python 3.12]
+            Templates[📄 Templates HTML<br/>Tailwind CSS]
+        end
+
+        subgraph DBContainer["📦 Container DB"]
+            MySQL[(🗄️ MySQL 8.0)]
+        end
+
+        Volume[💾 mysql_data<br/>Persistance]
+    end
+
+    User -->|HTTP :8000| Django
+    Django -->|ORM| MySQL
+    MySQL -.->|Store| Volume
+    Django --> Templates
+
+    style Django fill:#092e20,stroke:#0c4b33,color:#fff,stroke-width:2px
+    style MySQL fill:#00758f,stroke:#005f73,color:#fff,stroke-width:2px
+    style Templates fill:#38bdf8,stroke:#0284c7,color:#000,stroke-width:2px
+    style Volume fill:#f59e0b,stroke:#d97706,color:#fff,stroke-width:2px
+    style DockerCompose fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px
+    style WebContainer fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px
+    style DBContainer fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px`,
+        security: [
+            "Base de données MySQL isolée (réseau Docker interne)",
+            "Secrets gérés via variables d'environnement",
+            "CSRF protection Django activée",
+            "Validation des inputs côté serveur (notes 1-5)",
+            "Workflow GitFlow pour revue de code en équipe"
+        ],
+        cicd: "Projet collaboratif avec 3 développeurs et 38 commits Git. Workflow GitFlow structuré avec branches dédiées (dev-infra, dev-back, dev-front). Convention de nommage PEP 8 respectée. Seeder automatisé pour génération de données de test.",
+        demoUrl: null,
+        githubUrl: "https://github.com/MatthALXdev/django-feelback",
+        videoMp4: "assets/demos/feelback_demo.mp4",
+        screenshotImg: "assets/screenshots/feelback.png",
+        architectureImg: "assets/architecture/feelback-architecture.svg",
+        isCollaborative: true,
+        teamSize: 3,
+        myRole: "DevOps (Docker, MySQL, Git workflow)"
+    },
+    pateuf: {
+        title: "Pateuf Festival - Gestion d'Événements",
+        description: "Application web de gestion du Festival Pateuf avec architecture moderne serverless. Frontend Vue 3 connecté à un CMS headless Sanity, authentification OAuth2 via Auth0, et fonctions Netlify pour le backend.",
+        features: [
+            "Programme des concerts avec carte interactive Mapbox",
+            "CRUD complet sur programmations, FAQ et actualités",
+            "Authentification OAuth2 avec Auth0 et protection JWT",
+            "CMS headless Sanity pour flexibilité du contenu",
+            "Drag-and-drop pour réordonnancement des éléments",
+            "Architecture serverless avec Netlify Functions"
+        ],
+        stack: ["Vue 3", "Vite", "Pinia", "Tailwind CSS", "Sanity CMS", "Auth0", "Netlify", "Mapbox"],
+        architecture: "Architecture JAMstack moderne avec frontend Vue 3 SPA, gestion d'état centralisée via Pinia, backend serverless sur Netlify Functions. Sanity CMS comme source de données headless avec séparation lecture publique / écriture protégée par JWT.",
+        architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
+flowchart TD
+    User([👤 Utilisateur])
+    Admin([🔐 Admin])
+
+    subgraph Frontend["📱 Vue 3 SPA"]
+        Views[🖼️ Views<br/>Home / Gestion]
+        Pinia[📦 Pinia Stores]
+        Auth0Client[🔑 Auth0 SDK]
+    end
+
+    subgraph Netlify["⚡ Netlify Functions"]
+        PublicAPI[📖 API Publique<br/>Rate Limited]
+        ProtectedAPI[🔒 API Protégée<br/>JWT Verify]
+    end
+
+    subgraph External["☁️ Services Externes"]
+        Sanity[(📝 Sanity CMS)]
+        Auth0[🛡️ Auth0]
+        Mapbox[🗺️ Mapbox GL]
+    end
+
+    User -->|HTTP| Views
+    Admin -->|Login| Auth0Client
+    Auth0Client -->|OAuth2| Auth0
+    Views --> Pinia
+    Pinia -->|Fetch| PublicAPI
+    Pinia -->|Mutation + JWT| ProtectedAPI
+    PublicAPI -->|Read| Sanity
+    ProtectedAPI -->|Write| Sanity
+    Views -->|Maps| Mapbox
+
+    style Views fill:#42b883,stroke:#35495e,color:#fff,stroke-width:2px
+    style Pinia fill:#ffd859,stroke:#d4a50c,color:#000,stroke-width:2px
+    style Auth0 fill:#eb5424,stroke:#c43d12,color:#fff,stroke-width:2px
+    style Sanity fill:#f03e2f,stroke:#c7321f,color:#fff,stroke-width:2px
+    style Mapbox fill:#4264fb,stroke:#3451d1,color:#fff,stroke-width:2px
+    style PublicAPI fill:#00c7b7,stroke:#00a89d,color:#fff,stroke-width:2px
+    style ProtectedAPI fill:#00c7b7,stroke:#00a89d,color:#fff,stroke-width:2px`,
+        security: [
+            "Authentification OAuth2 via Auth0",
+            "Protection JWT sur toutes les mutations",
+            "Rate limiting sur endpoints publics",
+            "CSP headers configurés",
+            "Séparation lecture publique / écriture protégée",
+            "Tokens sécurisés côté client"
+        ],
+        cicd: "Projet personnel en développement actif (v0.3.0). Architecture moderne avec 25+ fichiers modifiés incluant 10 stores Pinia harmonisés et 6 Netlify Functions sécurisées. Code organisé avec ESLint/Prettier.",
+        demoUrl: null,
+        githubUrl: "https://github.com/MatthALXdev/Pateuf_Festival",
+        videoMp4: "assets/demos/pateuf_demo.mp4",
+        screenshotImg: "assets/screenshots/pateuf.png",
+        architectureImg: "assets/architecture/pateuf-architecture.svg",
+        isCollaborative: false
     }
 };
 
@@ -178,6 +314,19 @@ window.openProjectModal = function(projectKey) {
             <img src="${data.screenshotImg}" alt="${data.title} screenshot" class="modal-screenshot">
         </div>
     `;
+
+    // Collaborative badge if applicable
+    if (data.isCollaborative) {
+        bodyHTML += `
+            <div class="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-purple-600 font-semibold">👥 Projet Collaboratif</span>
+                    <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs font-medium">${data.teamSize} développeurs</span>
+                </div>
+                <p class="text-sm text-purple-800"><strong>Mon rôle :</strong> ${data.myRole}</p>
+            </div>
+        `;
+    }
 
     // Description
     bodyHTML += `
@@ -242,10 +391,16 @@ window.openProjectModal = function(projectKey) {
     // Links
     bodyHTML += `
         <div class="flex flex-wrap gap-3 mt-6">
-            <a href="${data.demoUrl}" target="_blank" rel="noopener noreferrer"
-               class="px-6 py-3 bg-sunrise-blue text-white rounded-lg font-semibold hover:bg-sunrise-blue/90 transition-colors inline-block">
-                Voir la démo live →
-            </a>
+            ${data.demoUrl ? `
+                <a href="${data.demoUrl}" target="_blank" rel="noopener noreferrer"
+                   class="px-6 py-3 bg-sunrise-blue text-white rounded-lg font-semibold hover:bg-sunrise-blue/90 transition-colors inline-block">
+                    Voir la démo live →
+                </a>
+            ` : `
+                <span class="px-6 py-3 bg-gray-300 text-gray-500 rounded-lg font-semibold inline-block cursor-not-allowed">
+                    Pas de démo live (projet scolaire)
+                </span>
+            `}
             <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer"
                class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors inline-block">
                 Code sur GitHub →

@@ -6,6 +6,21 @@
     <meta name="description" content="Matthieu Alix - Développeur Fullstack - Portfolio de projets en production">
     <meta name="author" content="Matthieu Alix">
 
+    <!-- Open Graph / Réseaux sociaux - Prévisualisation lors du partage de lien -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DevAlix - Matthieu Alix | Développeur Fullstack">
+    <meta property="og:description" content="Matthieu Alix - Développeur Fullstack - Portfolio de projets en production">
+    <meta property="og:url" content="https://votre-url.com">
+    <meta property="og:image" content="https://votre-url.com/preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter/X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevAlix - Matthieu Alix | Développeur Fullstack">
+    <meta name="twitter:description" content="Matthieu Alix - Développeur Fullstack - Portfolio de projets en production">
+    <meta name="twitter:image" content="https://votre-url.com/preview.png">
+
     <title>DevAlix - Matthieu Alix | Développeur Fullstack </title>
 
     <!-- Tailwind CSS CDN -->
@@ -284,6 +299,124 @@
                     </div>
                 </article>
 
+                <!-- Project Card: Feelback -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+                    <!-- Video demo -->
+                    <div class="relative h-64 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
+                        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                            <source src="assets/demos/feelback_demo.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la balise vidéo.
+                        </video>
+                        <!-- Collaborative badge overlay -->
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-purple-600 text-white rounded-full text-xs font-medium shadow-lg">
+                            👥 Projet Collaboratif
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-sunrise-blue mb-2">Feelback</h3>
+                        <p class="text-gray-600 mb-4">
+                            Application de questionnaires de satisfaction pour les livraisons. Projet collaboratif EPSI (équipe de 3). Mon rôle : DevOps (Docker, MySQL, Git workflow).
+                        </p>
+
+                        <!-- Stack Badges -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/django.svg" alt="" class="w-4 h-4">
+                                Django 5.1
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/mysql.svg" alt="" class="w-4 h-4">
+                                MySQL 8
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">
+                                Docker
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/tailwindcss.svg" alt="" class="w-4 h-4">
+                                Tailwind CSS
+                            </span>
+                        </div>
+
+                        <!-- Status Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">👥 3 développeurs</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">🎓 Projet scolaire</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">✅ 38 commits</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="openProjectModal('feelback')" class="px-4 py-2 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">
+                                Voir détails
+                            </button>
+                            <a href="https://github.com/MatthALXdev/django-feelback" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project Card: Pateuf Festival -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+                    <!-- Video demo -->
+                    <div class="relative h-64 bg-gradient-to-br from-green-500 to-teal-600 overflow-hidden">
+                        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                            <source src="assets/demos/pateuf_demo.mp4" type="video/mp4">
+                            Votre navigateur ne supporte pas la balise vidéo.
+                        </video>
+                        <!-- Dev badge overlay -->
+                        <div class="absolute top-4 right-4 px-3 py-1 bg-green-600 text-white rounded-full text-xs font-medium shadow-lg">
+                            v0.3.0 - En développement
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-sunrise-blue mb-2">Pateuf Festival</h3>
+                        <p class="text-gray-600 mb-4">
+                            Application de gestion de festival avec architecture JAMstack. Vue 3 + Sanity CMS + Auth0 + Netlify Functions. CRUD complet avec carte interactive.
+                        </p>
+
+                        <!-- Stack Badges -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/vuejs.svg" alt="" class="w-4 h-4">
+                                Vue 3
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/sanity.svg" alt="" class="w-4 h-4">
+                                Sanity CMS
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/auth0.svg" alt="" class="w-4 h-4">
+                                Auth0
+                            </span>
+                            <span class="px-3 py-1 bg-sky-light text-sunrise-blue rounded-full text-xs font-medium flex items-center gap-1.5">
+                                <img src="assets/logos/netlify.svg" alt="" class="w-4 h-4">
+                                Netlify
+                            </span>
+                        </div>
+
+                        <!-- Status Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">🚀 JAMstack</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">🔐 OAuth2 + JWT</span>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">⚡ Serverless</span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="openProjectModal('pateuf')" class="px-4 py-2 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">
+                                Voir détails
+                            </button>
+                            <a href="https://github.com/MatthALXdev/Pateuf_Festival" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
             </div>
         </div>
     </section>
@@ -310,6 +443,7 @@
                             <!-- Branch 1: Alternance -->
                             <div class="branch branch-primary">
                                 <div class="branch-badge">Priorité 1</div>
+                                <div class="branch-badge">Rentrée 2025 ou 2026</div>
                                 <div class="flex items-center gap-2 mb-2">
                                     <img src="assets/logos/EPSI.ico" alt="EPSI" class="w-5 h-5">
                                     <span class="text-sm font-semibold text-sunrise-blue">EPSI</span>
@@ -328,19 +462,21 @@
                             <!-- Branch 2: PMSMP -->
                             <div class="branch branch-secondary">
                                 <div class="branch-badge">Parallèle</div>
+                                <div class="branch-badge">Début 2026</div>
                                 <div class="flex items-center gap-2 mb-2">
                             <img src="assets/logos/france-travail.png" alt="France Travail" class="w-5 h-5">
-                            <span class="text-sm font-semibold text-sunrise-blue">France Travail</span>
-                        </div>
-                                <h4 class="branch-title">PMSMP - Immersion Professionnelle</h4>
-                                <p class="branch-subtitle">Période de Mise en Situation en Milieu Professionnel</p>
+                            <span class="text-sm font-semibold text-sunrise-blue">France Travail</span>                                </div>
+                                <h4 class="branch-title">Bachelor 3 Sciences Informatique et Numérique</h4>
+                                <p class="branch-subtitle">Spécialité Fullstack - En alternance</p>
+                                
                                 <ul class="branch-description">
-                                    <li>Immersion de 1 mois maximum en entreprise via France Travail</li>
-                                    <li>Découverte du métier et validation de compétences en situation réelle</li>
-                                    <li>Possibilité de renouvellement pour un parcours progressif</li>
-                                    <li>Tremplin vers un recrutement ou une formation qualifiante</li>
+                                    <li>Formation BAC+3 en alternance (contrat d'apprentissage ou professionnalisation)</li>
+                                    <li>Spécialisation DevOps avec focus sur l'automatisation et le déploiement continu</li>
+                                    <li>Développement fullstack avec Django, React et infrastructure as code</li>
+                                    <li>Rythme alternance : disponible selon besoins de l'entreprise</li>
                                 </ul>
                             </div>
+
                         </div>
 
                         <div class="timeline-cta">
