@@ -30,8 +30,8 @@ const techLogos = {
 // Project data
 const projects = {
     pyx: {
-        title: "Pyx - E-commerce Fonds d'Écran",
-        description: "E-commerce de fonds d'écran numériques avec parcours utilisateur complet. Interface moderne construite avec Django 5 et Tailwind CSS.",
+        title: "Pyx — Démo E-commerce sur Mesure",
+        description: "Démonstration d'un e-commerce sur mesure : parcours d'achat complet du catalogue à la confirmation de commande, sur une interface moderne et responsive.",
         features: [
             "Catalogue de produits responsive avec filtres",
             "Pages détail produit avec images haute résolution",
@@ -40,7 +40,7 @@ const projects = {
             "Optimisation des images avec service nginx-static mutualisé"
         ],
         stack: ["Django 5.1", "PostgreSQL 16", "Docker", "Tailwind CSS", "Gunicorn", "Nginx"],
-        architecture: "Architecture Django classique avec base de données PostgreSQL isolée dans un réseau Docker interne. Les media files sont servis par nginx-static mutualisé pour des performances optimales. Traefik v3 gère le reverse proxy avec HTTPS automatique via Let's Encrypt.",
+        architecture: "Une architecture pensée pour la fiabilité : la base de données est isolée du reste de l'infrastructure, les images sont servies rapidement même en forte affluence, et le site est accessible en HTTPS sécurisé par défaut.",
         architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
 flowchart TD
     User([👤 Utilisateur])
@@ -69,14 +69,14 @@ flowchart TD
     style VPS fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px
     style PyxStack fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px`,
         security: [
-            "HTTPS forcé (Let's Encrypt)",
-            "Secrets gérés via .env (hors Git)",
-            "CSRF protection activée",
-            "PostgreSQL isolé (réseau Docker interne)",
-            "DEBUG=False en production",
-            "Firewall VPS configuré"
+            "Connexion chiffrée (HTTPS) sur tout le site",
+            "Données sensibles jamais exposées dans le code",
+            "Protection contre les attaques courantes (CSRF)",
+            "Base de données isolée du reste de l'infrastructure",
+            "Configuration de production sécurisée",
+            "Pare-feu serveur actif"
         ],
-        cicd: "Tests automatisés avec pytest (coverage 65%). GitHub Actions exécute les tests à chaque push sur les branches main et develop.",
+        cicd: "Chaque mise à jour est testée automatiquement avant d'être mise en ligne, pour limiter les régressions et livrer en confiance.",
         demoUrl: "https://pyx.devamalix.fr",
         githubUrl: "https://github.com/MatthALXdev/dm",
         videoWebm: "assets/demos/pyx_demo.webm",
@@ -85,8 +85,8 @@ flowchart TD
         architectureImg: "assets/architecture/pyx-architecture.svg"
     },
     recontent: {
-        title: "ReContent - Reformulation IA",
-        description: "Outil de reformulation de contenu utilisant l'API Mistral AI. Interface React moderne pour réécrire et optimiser vos textes instantanément.",
+        title: "ReContent — Démo Intégration IA",
+        description: "Démonstration d'intégration d'IA générative dans une application web : reformulation de contenu en temps réel via l'API Mistral AI, illustrant la mise en place de chatbots et agents IA sur mesure.",
         features: [
             "Interface React SPA responsive",
             "Reformulation intelligente via Mistral AI",
@@ -95,7 +95,7 @@ flowchart TD
             "API Node.js avec Express"
         ],
         stack: ["React 18", "Node.js", "Express", "Mistral AI", "Docker", "Vite", "Nginx"],
-        architecture: "Architecture multi-conteneurs avec un frontend React servi par nginx et une API Node.js. Traefik route les requêtes selon le path (/api/recontent vers l'API). Communication sécurisée avec Mistral AI via clé API stockée dans variables d'environnement.",
+        architecture: "Le frontend et l'API sont séparés et communiquent de façon sécurisée avec le service d'IA (Mistral AI), sans jamais exposer la clé d'accès.",
         architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
 flowchart TD
     User([👤 Utilisateur])
@@ -127,14 +127,14 @@ flowchart TD
     style VPS fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px
     style Stack fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px`,
         security: [
-            "HTTPS forcé (Let's Encrypt)",
-            "API key Mistral sécurisée (.env)",
-            "CORS configuré strictement",
-            "Validation des inputs (longueur, format)",
-            "Pas de secrets dans Git",
-            "XSS protection (React escaping)"
+            "Connexion chiffrée (HTTPS)",
+            "Clé d'accès à l'IA jamais exposée",
+            "Accès à l'API restreint aux origines autorisées",
+            "Contenus utilisateurs validés avant traitement",
+            "Aucun secret stocké dans le code",
+            "Protection contre l'injection de contenu malveillant"
         ],
-        cicd: "Tests automatisés avec Jest (coverage 60%). GitHub Actions exécute les tests API à chaque push. Validation de la conformité des endpoints.",
+        cicd: "Les fonctionnalités de l'API sont testées automatiquement à chaque évolution, pour garantir un service stable.",
         demoUrl: "https://recontent.devamalix.fr",
         githubUrl: "https://github.com/MatthALXdev/recontent",
         videoWebm: "assets/demos/recontent_demo.webm",
@@ -144,7 +144,7 @@ flowchart TD
     },
     feelback: {
         title: "Feelback - Questionnaire de Satisfaction",
-        description: "Application collaborative de questionnaires de satisfaction pour les livraisons. Développée en équipe de 3 dans le cadre d'un projet scolaire EPSI. Mon rôle : DevOps (Docker, MySQL, workflow Git).",
+        description: "Application de suivi de satisfaction pour les livraisons : notation en un clic et tableau de bord en temps réel. Projet réalisé en équipe de 3, où j'ai piloté la partie infrastructure (Docker, base de données, workflow Git).",
         features: [
             "Questionnaire rapide avec 3 critères notés de 1 à 5 étoiles",
             "Dashboard statistiques en temps réel avec moyennes",
@@ -154,7 +154,7 @@ flowchart TD
             "Interface admin Django pour gestion des avis"
         ],
         stack: ["Django 5.1", "Python 3.12", "MySQL 8", "Docker", "Tailwind CSS"],
-        architecture: "Architecture multi-conteneurs Docker avec séparation frontend/backend. Application Django conteneurisée communiquant avec une base MySQL isolée. Workflow GitFlow avec branches dev-infra, dev-back et dev-front pour une collaboration efficace en équipe de 3 développeurs.",
+        architecture: "Application conteneurisée avec une base de données isolée, développée en équipe de 3 avec un workflow Git structuré pour fiabiliser les livraisons.",
         architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
 flowchart TD
     User([👤 Utilisateur])
@@ -185,13 +185,13 @@ flowchart TD
     style WebContainer fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px
     style DBContainer fill:#f1f5f9,stroke:#94a3b8,stroke-width:2px`,
         security: [
-            "Base de données MySQL isolée (réseau Docker interne)",
-            "Secrets gérés via variables d'environnement",
-            "CSRF protection Django activée",
-            "Validation des inputs côté serveur (notes 1-5)",
-            "Workflow GitFlow pour revue de code en équipe"
+            "Base de données isolée du reste de l'infrastructure",
+            "Données sensibles jamais exposées dans le code",
+            "Protection contre les attaques courantes (CSRF)",
+            "Saisies utilisateurs validées côté serveur",
+            "Revue de code systématique en équipe"
         ],
-        cicd: "Projet collaboratif avec 3 développeurs et 38 commits Git. Workflow GitFlow structuré avec branches dédiées (dev-infra, dev-back, dev-front). Convention de nommage PEP 8 respectée. Seeder automatisé pour génération de données de test.",
+        cicd: "Projet mené en équipe de 3, avec un historique Git structuré (38 commits) et des données de test générées automatiquement pour fiabiliser les développements.",
         demoUrl: null,
         githubUrl: "https://github.com/MatthALXdev/django-feelback",
         videoMp4: "assets/demos/feelback_demo.mp4",
@@ -203,7 +203,7 @@ flowchart TD
     },
     pateuf: {
         title: "Pateuf Festival - Gestion d'Événements",
-        description: "Application web de gestion du Festival Pateuf avec architecture moderne serverless. Frontend Vue 3 connecté à un CMS headless Sanity, authentification OAuth2 via Auth0, et fonctions Netlify pour le backend.",
+        description: "Plateforme de gestion pour le Festival Pateuf : programmation, actualités et carte interactive, avec une administration sécurisée. Projet personnel en développement actif.",
         features: [
             "Programme des concerts avec carte interactive Mapbox",
             "CRUD complet sur programmations, FAQ et actualités",
@@ -213,7 +213,7 @@ flowchart TD
             "Architecture serverless avec Netlify Functions"
         ],
         stack: ["Vue 3", "Vite", "Pinia", "Tailwind CSS", "Sanity CMS", "Auth0", "Netlify", "Mapbox"],
-        architecture: "Architecture JAMstack moderne avec frontend Vue 3 SPA, gestion d'état centralisée via Pinia, backend serverless sur Netlify Functions. Sanity CMS comme source de données headless avec séparation lecture publique / écriture protégée par JWT.",
+        architecture: "Architecture moderne et légère : le contenu est géré séparément de l'affichage, ce qui facilite les mises à jour, et l'accès en écriture est protégé pour les seuls administrateurs.",
         architectureMermaid: `%%{init: {'theme':'base', 'themeVariables': {'fontSize':'12px'}}}%%
 flowchart TD
     User([👤 Utilisateur])
@@ -254,14 +254,14 @@ flowchart TD
     style PublicAPI fill:#00c7b7,stroke:#00a89d,color:#fff,stroke-width:2px
     style ProtectedAPI fill:#00c7b7,stroke:#00a89d,color:#fff,stroke-width:2px`,
         security: [
-            "Authentification OAuth2 via Auth0",
-            "Protection JWT sur toutes les mutations",
-            "Rate limiting sur endpoints publics",
-            "CSP headers configurés",
-            "Séparation lecture publique / écriture protégée",
-            "Tokens sécurisés côté client"
+            "Connexion sécurisée pour les administrateurs",
+            "Toute modification de contenu est authentifiée",
+            "Protection contre les usages abusifs de l'API",
+            "En-têtes de sécurité configurés",
+            "Contenu public en lecture seule, écriture protégée",
+            "Sessions utilisateurs sécurisées"
         ],
-        cicd: "Projet personnel en développement actif (v0.3.0). Architecture moderne avec 25+ fichiers modifiés incluant 10 stores Pinia harmonisés et 6 Netlify Functions sécurisées. Code organisé avec ESLint/Prettier.",
+        cicd: "Projet personnel en développement actif, avec un code organisé et linté pour rester maintenable sur la durée.",
         demoUrl: null,
         githubUrl: "https://github.com/MatthALXdev/Pateuf_Festival",
         videoMp4: "assets/demos/pateuf_demo.mp4",
@@ -270,6 +270,18 @@ flowchart TD
         isCollaborative: false
     }
 };
+
+// Whole project card click → démo live si disponible, sinon GitHub
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.project-card-clickable').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            // Ne pas interférer avec les liens/boutons internes (démo, détails, GitHub, QR...)
+            if (e.target.closest('a, button')) return;
+            const url = card.dataset.demoUrl || card.dataset.githubUrl;
+            if (url) window.open(url, '_blank', 'noopener,noreferrer');
+        });
+    });
+});
 
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {

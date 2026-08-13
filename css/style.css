@@ -87,7 +87,7 @@ dialog {
     top: 0;
     background: linear-gradient(135deg, #E67451 0%, #5B8DBE 100%);
     color: white;
-    padding: 1.5rem 2rem;
+    padding: 1.125rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -98,7 +98,7 @@ dialog {
 
 .modal-header h2 {
     margin: 0;
-    font-size: 1.875rem;
+    font-size: 1.375rem;
     font-weight: bold;
 }
 
@@ -106,11 +106,11 @@ dialog {
     background: transparent;
     border: none;
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     padding: 0;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,7 +123,7 @@ dialog {
 }
 
 .modal-body {
-    padding: 2rem;
+    padding: 1.5rem;
     background: white;
     position: relative;
     z-index: 2;
@@ -133,10 +133,10 @@ dialog {
 
 .modal-body h3 {
     color: var(--sunrise-blue);
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: bold;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .modal-body h3:first-child {
@@ -222,62 +222,36 @@ dialog {
 
 /* Timeline styles */
 .timeline {
-    position: relative;
-    padding-left: 3rem;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 1rem;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, #E67451 0%, #5B8DBE 100%);
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-}
-
-.timeline-marker {
-    position: absolute;
-    left: -2.5rem;
-    top: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: var(--sunrise-orange);
-    border: 3px solid white;
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--sky-light);
-}
-
-.timeline-content {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.timeline-date {
-    color: var(--sunrise-orange);
-    font-weight: 600;
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-}
-
-.timeline-title {
-    color: var(--sunrise-blue);
-    font-weight: bold;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
 }
 
 .timeline-description {
-    color: #6b7280;
-    line-height: 1.625;
+    color: #374151;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.timeline-year {
+    color: var(--sunrise-orange);
+    font-weight: 700;
+}
+
+/* FAQ accordion (native details/summary) */
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item .faq-icon {
+    display: inline-block;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.faq-item[open] .faq-icon {
+    transform: rotate(45deg);
 }
 
 /* Skill grid */
@@ -354,20 +328,6 @@ dialog {
 
     .modal-body {
         padding: 1.5rem;
-    }
-
-    .timeline {
-        padding-left: 2rem;
-    }
-
-    .timeline::before {
-        left: 0.5rem;
-    }
-
-    .timeline-marker {
-        left: -1.75rem;
-        width: 1rem;
-        height: 1rem;
     }
 }
 
