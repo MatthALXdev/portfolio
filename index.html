@@ -39,67 +39,68 @@
                         'sunrise-blue': '#2B4C7E',
                         'dawn-blue': '#5B8DBE',
                         'sky-light': '#E8F1F8',
+                        'rust-dark': '#7A3616',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-white text-gray-900">
+<body class="text-gray-900">
+
+    <!-- Aura Background (Golden Hour) -->
+    <div class="aura-bg" aria-hidden="true">
+        <span class="aura-layer aura-layer-1" aria-hidden="true"></span>
+        <span class="aura-layer aura-layer-2" aria-hidden="true"></span>
+    </div>
+
+    <!-- Particules en suspension (effet "mare au microscope") -->
+    <canvas id="aura-particles" class="aura-particles" aria-hidden="true"></canvas>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-md z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="#" class="flex items-center">
-                        <img src="assets/logos/logo.svg" alt="Devamalix" class="h-9 w-auto">
-                    </a>
-                </div>
+    <nav class="fixed top-0 left-0 right-0 glass-nav border-b border-white/40 shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center shrink-0">
+                <img src="assets/logos/logo.svg" alt="Devamalix" class="h-10 w-auto">
+            </a>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center gap-6">
-                    <div class="flex items-baseline space-x-8">
-                        <a href="#prestations" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Prestations</a>
-                        <a href="#realisations" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Réalisations</a>
-                        <a href="#parcours" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Parcours</a>
-                        <a href="#contact" class="text-gray-700 hover:text-sunrise-orange transition-colors px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-                    </div>
-                    <span class="flex items-center gap-1.5 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-200">
-                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                        Disponible pour de nouveaux projets
-                    </span>
-                </div>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#prestations" class="squircle-element flex items-center h-9 px-3.5 text-sm font-medium text-gray-700 hover:text-sunrise-orange hover:bg-white/40 transition-colors">Prestations</a>
+                <a href="#realisations" class="squircle-element flex items-center h-9 px-3.5 text-sm font-medium text-gray-700 hover:text-sunrise-orange hover:bg-white/40 transition-colors">Réalisations</a>
+                <a href="#parcours" class="squircle-element flex items-center h-9 px-3.5 text-sm font-medium text-gray-700 hover:text-sunrise-orange hover:bg-white/40 transition-colors">Parcours</a>
+                <a href="#contact" class="squircle-element flex items-center h-9 px-3.5 text-sm font-medium text-gray-700 hover:text-sunrise-orange hover:bg-white/40 transition-colors">Contact</a>
+                <span class="squircle-element flex items-center gap-1.5 h-9 px-3.5 text-xs font-medium text-green-700 bg-green-50/80 border border-green-200/70">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                    Disponible pour de nouveaux projets
+                </span>
+            </div>
 
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-sunrise-orange focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button type="button" id="mobile-menu-button" aria-label="Ouvrir le menu" class="squircle-element flex items-center justify-center w-10 h-10 text-gray-700 hover:text-sunrise-orange hover:bg-white/40 transition-colors focus:outline-none">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
         </div>
 
         <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+        <div id="mobile-menu" class="hidden md:hidden px-4">
+            <div class="">
                 <a href="#prestations" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Prestations</a>
                 <a href="#realisations" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Réalisations</a>
                 <a href="#parcours" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Parcours</a>
                 <a href="#contact" class="text-gray-700 hover:text-sunrise-orange block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <span class="flex items-center gap-1.5 mx-3 mt-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-200 w-fit">
-                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                    Disponible pour de nouveaux projets
-                </span>
+                
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-20 pb-14 bg-gradient-to-br from-sunrise-orange via-dawn-blue to-sunrise-blue">
+    <section class="pt-20 pb-14">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <!-- Logo -->
@@ -110,44 +111,44 @@
                 </div>
                 <h1 class="sr-only">Devamalix — Matthieu Alix, développeur fullstack</h1>
 
-                <p class="text-sm text-white/70 mb-3 uppercase tracking-wide">Matthieu Alix — Développeur Fullstack</p>
-                <p class="text-lg md:text-xl text-white/90 mb-4 font-semibold max-w-2xl mx-auto">
+                <p class="text-sm text-sunrise-blue/70 mb-3 uppercase tracking-wide font-semibold">Matthieu Alix — Développeur Fullstack</p>
+                <p class="text-lg md:text-xl text-sunrise-blue mb-4 font-semibold max-w-2xl mx-auto">
                     Sites web, applications sur mesure et chatbots IA — je construis les outils digitaux qui font avancer votre business.
                 </p>
-                <p class="text-base md:text-lg text-white/80 mb-6 max-w-xl mx-auto">
+                <p class="text-base md:text-lg text-gray-600 mb-6 max-w-xl mx-auto">
                     Reconverti depuis la biologie moléculaire, j'apporte à chaque projet la même rigueur méthodique : cahier des charges clair, code testé, livraisons fiables.
                 </p>
 
                 <!-- Services Badges -->
                 <div class="flex flex-wrap justify-center gap-2 mb-8">
-                    <span class="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs md:text-sm font-medium border border-white/30">🌐 Sites web</span>
-                    <span class="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs md:text-sm font-medium border border-white/30">⚙️ Applications sur mesure</span>
-                    <span class="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs md:text-sm font-medium border border-white/30">🤖 Chatbots IA</span>
+                    <span class="glass px-3 py-1.5 text-sunrise-blue rounded-full text-xs md:text-sm font-medium">🌐 Sites web</span>
+                    <span class="glass px-3 py-1.5 text-sunrise-blue rounded-full text-xs md:text-sm font-medium">⚙️ Applications sur mesure</span>
+                    <span class="glass px-3 py-1.5 text-sunrise-blue rounded-full text-xs md:text-sm font-medium">🤖 Chatbots IA</span>
                 </div>
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="mailto:matthieu.alix@devamalix.fr" class="inline-block px-6 py-2.5 bg-white text-sunrise-blue rounded-lg font-semibold text-sm md:text-base hover:bg-sky-light transition-colors shadow-lg">
+                    <a href="mailto:matthieu.alix@devamalix.fr" class="inline-block px-6 py-2.5 bg-sunrise-orange text-white rounded-lg font-semibold text-sm md:text-base hover:bg-sunrise-orange/90 transition-colors shadow-lg">
                         Discutons de votre projet
                     </a>
-                    <a href="#realisations" class="inline-block px-6 py-2.5 bg-transparent border-2 border-white text-white rounded-lg font-semibold text-sm md:text-base hover:bg-white/10 transition-colors">
+                    <a href="#realisations" class="inline-block px-6 py-2.5 bg-transparent border-2 border-sunrise-blue text-sunrise-blue rounded-lg font-semibold text-sm md:text-base hover:bg-sunrise-blue/10 transition-colors">
                         Voir nos réalisations
                     </a>
                 </div>
 
                 <!-- Social Links -->
                 <div class="mt-8 flex justify-center gap-5">
-                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="text-white hover:text-sky-light transition-colors">
+                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
                         </svg>
                     </a>
-                    <a href="https://www.linkedin.com/in/matth-alx-dev" target="_blank" rel="noopener noreferrer" class="text-white hover:text-sky-light transition-colors">
+                    <a href="https://www.linkedin.com/in/matth-alx-dev" target="_blank" rel="noopener noreferrer" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                         </svg>
                     </a>
-                    <a href="mailto:matthieu.alix@devamalix.fr" class="text-white hover:text-sky-light transition-colors">
+                    <a href="mailto:matthieu.alix@devamalix.fr" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -158,7 +159,7 @@
     </section>
 
     <!-- Pourquoi Devamalix Section -->
-    <section id="pourquoi" class="py-16 bg-white">
+    <section id="pourquoi" class="py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Pourquoi Devamalix</h2>
@@ -194,7 +195,7 @@
     </section>
 
     <!-- Prestations Section -->
-    <section id="prestations" class="py-16 bg-sky-light">
+    <section id="prestations" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Prestations</h2>
@@ -204,7 +205,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow flex flex-col">
+                <div class="glass glass-nav rounded-xl shadow-lg p-6 flex flex-col">
                     <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-sunrise-orange to-dawn-blue flex items-center justify-center text-white text-lg mb-4">🌐</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-1">Site web</h3>
                     <p class="text-sm text-gray-500 mb-4">Vitrine ou e-commerce, pensé pour convertir.</p>
@@ -219,7 +220,7 @@
                         <a href="mailto:matthieu.alix@devamalix.fr?subject=Devis%20-%20Site%20web" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Demander un devis</a>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow flex flex-col">
+                <div class="glass glass-nav rounded-xl shadow-lg p-6 flex flex-col">
                     <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-sunrise-orange to-dawn-blue flex items-center justify-center text-white text-lg mb-4">⚙️</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-1">Application sur mesure</h3>
                     <p class="text-sm text-gray-500 mb-4">Un outil métier taillé pour vos process.</p>
@@ -234,7 +235,7 @@
                         <a href="mailto:matthieu.alix@devamalix.fr?subject=Devis%20-%20Application%20sur%20mesure" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Demander un devis</a>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow flex flex-col">
+                <div class="glass glass-nav rounded-xl shadow-lg p-6 flex flex-col">
                     <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-sunrise-orange to-dawn-blue flex items-center justify-center text-white text-lg mb-4">🤖</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-1">Chatbot & agent IA</h3>
                     <p class="text-sm text-gray-500 mb-4">L'IA au service de votre activité.</p>
@@ -254,14 +255,14 @@
     </section>
 
     <!-- Réalisations Section -->
-    <section id="realisations" class="py-16 bg-white">
+    <section id="realisations" class="py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Réalisations</h2>
                 <p class="text-base text-gray-600 max-w-2xl mx-auto">
                     Un aperçu concret de mon savoir-faire, à travers des projets déployés en conditions réelles.
                 </p>
-                <p class="mt-3 text-sm font-semibold text-sunrise-orange">
+                <p class="mt-3 text-sm font-semibold text-rust-dark">
                     Premiers projets clients en cours de livraison.
                 </p>
             </div>
@@ -269,7 +270,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 <!-- Project Card: Pyx -->
-                <article class="project-card-clickable cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-demo-url="https://pyx.devamalix.fr" data-github-url="https://github.com/MatthALXdev/dm">
+                <article class="project-card-clickable cursor-pointer glass glass-nav rounded-xl shadow-lg overflow-hidden" data-demo-url="https://pyx.devamalix.fr" data-github-url="https://github.com/MatthALXdev/dm">
                     <div class="relative h-52 bg-gradient-to-br from-sunrise-orange to-dawn-blue overflow-hidden">
                         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                             <source src="assets/demos/pyx_demo.mp4" type="video/mp4">
@@ -285,23 +286,23 @@
                             Exemple de boutique en ligne complète : catalogue, fiche produit, tunnel d'achat et confirmation de commande. Illustre ma capacité à livrer un e-commerce sur mesure clé en main.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/django.svg" alt="" class="w-4 h-4">Django 5
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/postgresql.svg" alt="" class="w-4 h-4">PostgreSQL 16
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">Docker
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/tailwindcss.svg" alt="" class="w-4 h-4">Tailwind CSS
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🟢 HTTPS</span>
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🟢 Tests</span>
-                            <span class="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-[11px] font-medium">🟡 CI/CD en cours</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🟢 HTTPS</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🟢 Tests</span>
+                            <span class="px-2.5 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-[11px] font-semibold">🟡 CI/CD en cours</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <a href="https://pyx.devamalix.fr" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Voir la démo →</a>
@@ -318,7 +319,7 @@
                 </article>
 
                 <!-- Project Card: ReContent -->
-                <article class="project-card-clickable cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-demo-url="https://recontent.devamalix.fr" data-github-url="https://github.com/MatthALXdev/recontent">
+                <article class="project-card-clickable cursor-pointer glass glass-nav rounded-xl shadow-lg overflow-hidden" data-demo-url="https://recontent.devamalix.fr" data-github-url="https://github.com/MatthALXdev/recontent">
                     <div class="relative h-52 bg-gradient-to-br from-dawn-blue to-sunrise-blue overflow-hidden">
                         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                             <source src="assets/demos/recontent_demo.mp4" type="video/mp4">
@@ -334,23 +335,23 @@
                             Exemple d'intégration d'IA générative dans une application web : reformulation de texte en temps réel via l'API Mistral AI. Illustre ma capacité à intégrer chatbots et agents IA dans vos outils.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/react.svg" alt="" class="w-4 h-4">React 18
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/nodejs.svg" alt="" class="w-4 h-4">Node.js
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/mistralai.svg" alt="" class="w-4 h-4">Mistral AI
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">Docker
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🟢 HTTPS</span>
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🟢 Tests</span>
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🟢 CI/CD</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🟢 HTTPS</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🟢 Tests</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🟢 CI/CD</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <a href="https://recontent.devamalix.fr" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Voir la démo →</a>
@@ -367,7 +368,7 @@
                 </article>
 
                 <!-- Project Card: Feelback -->
-                <article class="project-card-clickable cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-github-url="https://github.com/MatthALXdev/django-feelback">
+                <article class="project-card-clickable cursor-pointer glass glass-nav rounded-xl shadow-lg overflow-hidden" data-github-url="https://github.com/MatthALXdev/django-feelback">
                     <div class="relative h-52 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
                         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                             <source src="assets/demos/feelback_demo.mp4" type="video/mp4">
@@ -383,23 +384,23 @@
                             Application de questionnaires de satisfaction pour les livraisons. Projet collaboratif EPSI (équipe de 3). Mon rôle : DevOps (Docker, MySQL, Git workflow).
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/django.svg" alt="" class="w-4 h-4">Django 5.1
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/mysql.svg" alt="" class="w-4 h-4">MySQL 8
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/docker.svg" alt="" class="w-4 h-4">Docker
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/tailwindcss.svg" alt="" class="w-4 h-4">Tailwind CSS
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2.5 py-0.5 bg-purple-100 text-purple-700 rounded-full text-[11px] font-medium">👥 3 développeurs</span>
-                            <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-[11px] font-medium">🎓 Projet scolaire</span>
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">✅ 38 commits</span>
+                            <span class="px-2.5 py-0.5 bg-purple-100 text-purple-700 rounded-full text-[11px] font-semibold">👥 3 développeurs</span>
+                            <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-[11px] font-semibold">🎓 Projet scolaire</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">✅ 38 commits</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <button onclick="openProjectModal('feelback')" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Voir détails</button>
@@ -409,7 +410,7 @@
                 </article>
 
                 <!-- Project Card: Pateuf Festival -->
-                <article class="project-card-clickable cursor-pointer bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow" data-github-url="https://github.com/MatthALXdev/Pateuf_Festival">
+                <article class="project-card-clickable cursor-pointer glass glass-nav rounded-xl shadow-lg overflow-hidden" data-github-url="https://github.com/MatthALXdev/Pateuf_Festival">
                     <div class="relative h-52 bg-gradient-to-br from-green-500 to-teal-600 overflow-hidden">
                         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                             <source src="assets/demos/pateuf_demo.mp4" type="video/mp4">
@@ -425,23 +426,23 @@
                             Application de gestion de festival avec architecture JAMstack. Vue 3 + Sanity CMS + Auth0 + Netlify Functions. CRUD complet avec carte interactive.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/vuejs.svg" alt="" class="w-4 h-4">Vue 3
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/sanity.svg" alt="" class="w-4 h-4">Sanity CMS
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/auth0.svg" alt="" class="w-4 h-4">Auth0
                             </span>
-                            <span class="px-2.5 py-1 bg-gray-100 text-gray-500 rounded-full text-[11px] font-medium flex items-center gap-1.5">
+                            <span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-full text-[11px] font-semibold flex items-center gap-1.5">
                                 <img src="assets/logos/netlify.svg" alt="" class="w-4 h-4">Netlify
                             </span>
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-medium">🚀 JAMstack</span>
-                            <span class="px-2.5 py-0.5 bg-orange-100 text-orange-700 rounded-full text-[11px] font-medium">🔐 OAuth2 + JWT</span>
-                            <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-[11px] font-medium">⚡ Serverless</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full text-[11px] font-semibold">🚀 JAMstack</span>
+                            <span class="px-2.5 py-0.5 bg-orange-100 text-orange-700 rounded-full text-[11px] font-semibold">🔐 OAuth2 + JWT</span>
+                            <span class="px-2.5 py-0.5 bg-blue-100 text-blue-700 rounded-full text-[11px] font-semibold">⚡ Serverless</span>
                         </div>
                         <div class="flex flex-wrap gap-3">
                             <button onclick="openProjectModal('pateuf')" class="px-3.5 py-1.5 bg-sunrise-blue text-white rounded-lg text-sm font-medium hover:bg-sunrise-blue/90 transition-colors">Voir détails</button>
@@ -455,7 +456,7 @@
     </section>
 
     <!-- Méthode de travail Section -->
-    <section id="methode" class="py-16 bg-sky-light">
+    <section id="methode" class="py-16">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Comment on travaille ensemble</h2>
@@ -466,28 +467,28 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="px-4">
-                    <div class="text-3xl font-bold text-sunrise-orange/40 mb-2">01</div>
+                    <div class="text-3xl font-bold text-rust-dark/70 mb-2">01</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-2">Comprendre le besoin</h3>
                     <p class="text-gray-600 text-sm">
                         Un premier échange pour cerner votre projet, vos contraintes et vos objectifs — sans jargon technique inutile.
                     </p>
                 </div>
                 <div class="px-4">
-                    <div class="text-3xl font-bold text-sunrise-orange/40 mb-2">02</div>
+                    <div class="text-3xl font-bold text-rust-dark/70 mb-2">02</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-2">Cadrer ensemble</h3>
                     <p class="text-gray-600 text-sm">
                         Je propose un périmètre clair et un devis détaillé, pour qu'on parte sur les mêmes bases avant de commencer.
                     </p>
                 </div>
                 <div class="px-4">
-                    <div class="text-3xl font-bold text-sunrise-orange/40 mb-2">03</div>
+                    <div class="text-3xl font-bold text-rust-dark/70 mb-2">03</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-2">Développer avec visibilité</h3>
                     <p class="text-gray-600 text-sm">
                         Vous suivez l'avancement à chaque étape : rien ne se construit hors de votre vue.
                     </p>
                 </div>
                 <div class="px-4">
-                    <div class="text-3xl font-bold text-sunrise-orange/40 mb-2">04</div>
+                    <div class="text-3xl font-bold text-rust-dark/70 mb-2">04</div>
                     <h3 class="text-lg font-bold text-sunrise-blue mb-2">Livrer et transmettre</h3>
                     <p class="text-gray-600 text-sm">
                         Mise en ligne, explications claires sur le fonctionnement, et passation en toute autonomie.
@@ -498,7 +499,7 @@
     </section>
 
     <!-- Parcours Section -->
-    <section id="parcours" class="py-16 bg-white">
+    <section id="parcours" class="py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Mon Parcours</h2>
@@ -551,14 +552,14 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-16 bg-sky-light">
+    <section id="faq" class="py-16">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-sunrise-blue mb-3">Questions fréquentes</h2>
             </div>
 
             <div class="space-y-3">
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Comment se déroule un projet avec Devamalix ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -567,7 +568,7 @@
                         Après un premier échange pour comprendre votre besoin, je vous propose un cadrage clair (périmètre, devis) avant de démarrer le développement. Vous êtes tenu informé à chaque étape jusqu'à la mise en ligne.
                     </p>
                 </details>
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Combien coûte un site ou une application sur mesure ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -576,7 +577,7 @@
                         Chaque projet est différent : le tarif dépend de la complexité, des fonctionnalités et du délai souhaité. Je vous propose un devis détaillé après notre premier échange, sans engagement.
                     </p>
                 </details>
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Travaillez-vous sur des sites déjà existants ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -585,7 +586,7 @@
                         Oui, je peux intervenir sur un projet existant : audit technique, corrections ou évolutions. Contactez-moi pour qu'on regarde ensemble ce qui est possible.
                     </p>
                 </details>
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Quelles technologies utilisez-vous ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -594,7 +595,7 @@
                         Principalement Django (Python), React et Node.js côté développement, avec Docker pour l'hébergement. Le choix technique s'adapte toujours à votre projet plutôt que l'inverse.
                     </p>
                 </details>
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Combien de temps prend un projet ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -603,7 +604,7 @@
                         Ça dépend fortement du périmètre : un site vitrine simple se construit plus vite qu'une application sur mesure. Le délai est toujours discuté et cadré ensemble avant le démarrage.
                     </p>
                 </details>
-                <details class="faq-item bg-white rounded-xl shadow-lg p-5">
+                <details class="faq-item glass glass-nav rounded-xl shadow-lg p-5">
                     <summary class="font-semibold text-sunrise-blue cursor-pointer list-none flex items-center justify-between gap-4">
                         Comment vous contacter ?
                         <span class="faq-icon text-sunrise-orange">+</span>
@@ -617,37 +618,38 @@
     </section>
 
     <!-- CTA Final Section -->
-    <section class="py-16 bg-gradient-to-br from-sunrise-orange via-dawn-blue to-sunrise-blue">
+    <section class="py-16">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-4">Parlons de votre projet</h2>
-            <p class="text-white/90 mb-8 max-w-xl mx-auto">
+            <h2 class="text-3xl font-bold text-sunrise-blue mb-4">Parlons de votre projet</h2>
+            <p class="text-gray-600 mb-8 max-w-xl mx-auto">
                 Un site à créer, une application à développer, une idée d'automatisation par l'IA ? Décrivez-moi votre besoin, je reviens vers vous rapidement.
             </p>
-            <a href="mailto:matthieu.alix@devamalix.fr" class="inline-block px-8 py-3 bg-white text-sunrise-blue rounded-lg font-semibold hover:bg-sky-light transition-colors shadow-lg">
+            <a href="mailto:matthieu.alix@devamalix.fr" class="inline-block px-8 py-3 bg-sunrise-orange text-white rounded-lg font-semibold hover:bg-sunrise-orange/90 transition-colors shadow-lg">
                 Décrire mon projet
             </a>
         </div>
     </section>
 
     <!-- Contact/Footer Section -->
-    <footer id="contact" class="py-10 bg-sunrise-blue text-white">
+    <footer id="contact" class="py-10 glass-nav border-t border-white/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <img src="assets/logos/logofb.svg" alt="Devamalix" class="h-16 w-auto mx-auto mb-4">
-                <p class="mb-2">Sites web, applications sur mesure & chatbots IA, par Matthieu Alix</p>
-                <p class="mb-6 text-white/80">Toulouse, France</p>
+                <p class="mb-2 text-gray-700">Sites web, applications sur mesure & chatbots IA, par Matthieu Alix</p>
+                <p class="mb-6 text-gray-500">Toulouse, France</p>
                 <div class="flex justify-center gap-6 mb-6">
-                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="hover:text-sunrise-orange transition-colors">GitHub</a>
-                    <a href="https://www.linkedin.com/in/matth-alx-dev" target="_blank" rel="noopener noreferrer" class="hover:text-sunrise-orange transition-colors">LinkedIn</a>
-                    <a href="mailto:matthieu.alix@devamalix.fr" class="hover:text-sunrise-orange transition-colors">matthieu.alix@devamalix.fr</a>
+                    <a href="https://github.com/MatthALXdev" target="_blank" rel="noopener noreferrer" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">GitHub</a>
+                    <a href="https://www.linkedin.com/in/matth-alx-dev" target="_blank" rel="noopener noreferrer" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">LinkedIn</a>
+                    <a href="mailto:matthieu.alix@devamalix.fr" class="text-sunrise-blue hover:text-sunrise-orange transition-colors">matthieu.alix@devamalix.fr</a>
                 </div>
                 <!-- MODIFICATION 3 : copyright 2026 -->
-                <p class="text-sm text-white/60">© 2026 Matthieu Alix - Tous droits réservés</p>
+                <p class="text-sm text-gray-400">© 2026 Matthieu Alix - Tous droits réservés</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
+    <script src="js/particles.js"></script>
 </body>
 </html>

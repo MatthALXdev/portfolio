@@ -7,6 +7,10 @@
     --sunrise-blue: #2B4C7E;
     --dawn-blue: #5B8DBE;
     --sky-light: #E8F1F8;
+    /* Orange assombri : le sunrise-orange plein devient illisible
+       posé directement sur le fond aura "Golden Hour" (orange sur
+       orange). Réservé au texte qui n'est pas sur une carte en verre. */
+    --rust-dark: #7A3616;
 }
 
 /* Smooth scroll behavior */
@@ -17,6 +21,171 @@ html {
 /* Custom gradient background */
 .bg-gradient-sunrise {
     background: linear-gradient(135deg, #E67451 0%, #5B8DBE 100%);
+}
+
+/* =====================================================
+   Aura Background — "Golden Hour" (auragradients.vercel.app)
+   2 couches de linear-gradient floutées, fusionnées en
+   mix-blend-mode:multiply. Palette ambre pure (pas de bleu,
+   pour ne pas dupliquer les couleurs du logo).
+
+   Architecture blend-mode (impérative) :
+   - La couleur de base (#faf8f2) vit sur <body>, jamais sur
+     le conteneur .aura-bg lui-même — sinon le multiply se
+     fusionne avec cette couleur locale au lieu de "traverser"
+     jusqu'au fond réel de la page (rendu délavé/trop sombre).
+   - .aura-bg reste donc transparent et sans isolation, pour
+     laisser le blend atteindre le body.
+   ===================================================== */
+body {
+    background-color: #faf8f2;
+}
+
+.aura-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    /* pas de background-color ici : voir note ci-dessus */
+}
+
+.aura-layer {
+    position: absolute;
+    inset: -15%;
+    background-size: cover;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Couche fine : transition serrée */
+.aura-layer-1 {
+    filter: blur(125px);
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0) 0%,
+        rgba(255, 183, 77, 0.12) 28%,
+        rgb(255, 255, 255) 18%,
+        rgb(255, 138, 61) 68%,
+        rgb(183, 77, 0) 100%
+    );
+    animation: auraDrift1 34s ease-in-out infinite;
+}
+
+/* Couche large : balayage doux, "high key" */
+.aura-layer-2 {
+    filter: blur(100px);
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0) 0%,
+        rgba(255, 183, 77, 0.22) 34%,
+        rgb(255, 255, 255) 66%,
+        rgb(255, 138, 61) 82%,
+        rgb(183, 77, 0) 100%
+    );
+    animation: auraDrift2 42s ease-in-out infinite;
+}
+
+/* Flou desktop (le prompt de référence distingue mobile/desktop) */
+@media (min-width: 769px) {
+    .aura-layer-1 { filter: blur(180px); }
+    .aura-layer-2 { filter: blur(144px); }
+}
+
+@keyframes auraDrift1 {
+    0%, 100% { transform: translateZ(0) translate(0, 0) scale(1); }
+    50% { transform: translateZ(0) translate(3%, 4%) scale(1.05); }
+}
+
+@keyframes auraDrift2 {
+    0%, 100% { transform: translateZ(0) translate(0, 0) scale(1); }
+    50% { transform: translateZ(0) translate(-4%, -3%) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aura-layer {
+        animation: none;
+    }
+}
+
+/* Particules — points blancs en suspension au-dessus de l'aura,
+   pilotés par js/particles.js (canvas). Purement décoratif. */
+.aura-particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@media print {
+    .aura-particles {
+        display: none !important;
+    }
+}
+
+/* =====================================================
+   Glassmorphism utilities — éléments en verre dépoli
+   flottant au-dessus du fond aura.
+   ===================================================== */
+.glass {
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease,
+        border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet "swatch reveal" du site de référence : le verre s'éclaircit
+   légèrement et le flou s'intensifie un peu au survol, un fin liseré
+   chaud s'allume autour de la carte. Volontairement discret — on garde
+   la transparence proche du repos plutôt qu'un flash blanc. Pas de
+   lift/scale : le contenu (CTA, texte) reste toujours visible et
+   cliquable, y compris au tactile. */
+.glass:hover,
+.glass:focus-within {
+    background: rgba(255, 255, 255, 0.46);
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    border-color: rgba(230, 116, 81, 0.3);
+    box-shadow: 0 0 0 1px rgba(230, 116, 81, 0.08),
+        0 16px 32px -16px rgba(43, 76, 126, 0.25);
+}
+
+.glass-dark {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-nav {
+    background: rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Squircle — même recette que auragradients.vercel.app
+   (corner-shape n'est pas encore supporté partout ; le
+   border-radius seul reste un repli élégant). */
+.squircle-element {
+    border-radius: 20px;
+    corner-shape: squircle;
+}
+
+/* Fallback pour navigateurs sans backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+        background: rgba(255, 255, 255, 0.92);
+    }
+
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    .glass-dark {
+        background: rgba(255, 255, 255, 0.85);
+    }
 }
 
 /* Modal Styles */
@@ -234,7 +403,7 @@ dialog {
 }
 
 .timeline-year {
-    color: var(--sunrise-orange);
+    color: var(--rust-dark);
     font-weight: 700;
 }
 
@@ -454,6 +623,14 @@ dialog {
 @media print {
     nav {
         display: none;
+    }
+
+    .aura-bg {
+        display: none !important;
+    }
+
+    body {
+        background: white;
     }
 
     .modal-overlay {
