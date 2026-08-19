@@ -8,7 +8,7 @@
     --dawn-blue: #5B8DBE;
     --sky-light: #E8F1F8;
     /* Orange assombri : le sunrise-orange plein devient illisible
-       posé directement sur le fond aura "Golden Hour" (orange sur
+       posé directement sur le fond aura (dominante orange, orange sur
        orange). Réservé au texte qui n'est pas sur une carte en verre. */
     --rust-dark: #7A3616;
 }
@@ -24,10 +24,10 @@ html {
 }
 
 /* =====================================================
-   Aura Background — "Golden Hour" (auragradients.vercel.app)
-   2 couches de linear-gradient floutées, fusionnées en
-   mix-blend-mode:multiply. Palette ambre pure (pas de bleu,
-   pour ne pas dupliquer les couleurs du logo).
+   Aura Background — "Volcanic Glass" (auragradients.vercel.app)
+   3 couches de radial-gradient floutées, fusionnées en
+   mix-blend-mode:multiply. Orange volcanique + touche de bleu
+   + accent magenta discret.
 
    Architecture blend-mode (impérative) :
    - La couleur de base (#faf8f2) vit sur <body>, jamais sur
@@ -53,43 +53,52 @@ body {
 .aura-layer {
     position: absolute;
     inset: -15%;
-    background-size: cover;
     mix-blend-mode: multiply;
     pointer-events: none;
     transform: translateZ(0);
     will-change: transform;
 }
 
-/* Couche fine : transition serrée */
+/* Couche 1 : masse orange volcanique, en bas à gauche */
 .aura-layer-1 {
-    filter: blur(125px);
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0) 0%,
-        rgba(255, 183, 77, 0.12) 28%,
-        rgb(255, 255, 255) 18%,
-        rgb(255, 138, 61) 68%,
-        rgb(183, 77, 0) 100%
+    filter: blur(95px);
+    background-image: radial-gradient(
+        ellipse 50% 42% at 32% 55%,
+        rgba(234, 88, 12, 0.72) 0%,
+        rgba(124, 45, 18, 0.18) 48%,
+        transparent 72%
     );
     animation: auraDrift1 34s ease-in-out infinite;
 }
 
-/* Couche large : balayage doux, "high key" */
+/* Couche 2 : accent bleu, en haut à droite */
 .aura-layer-2 {
-    filter: blur(100px);
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0) 0%,
-        rgba(255, 183, 77, 0.22) 34%,
-        rgb(255, 255, 255) 66%,
-        rgb(255, 138, 61) 82%,
-        rgb(183, 77, 0) 100%
+    filter: blur(120px);
+    background-image: radial-gradient(
+        ellipse 42% 55% at 69% 38%,
+        rgba(25, 120, 210, 0.64) 0%,
+        rgba(180, 83, 9, 0.14) 48%,
+        transparent 72%
     );
     animation: auraDrift2 42s ease-in-out infinite;
 }
 
+/* Couche 3 : touche magenta discrète, en bas */
+.aura-layer-3 {
+    filter: blur(130px);
+    background-image: radial-gradient(
+        ellipse 24% 28% at 54% 74%,
+        rgba(251, 0, 255, 0.4) 0%,
+        transparent 65%
+    );
+    animation: auraDrift3 38s ease-in-out infinite;
+}
+
 /* Flou desktop (le prompt de référence distingue mobile/desktop) */
 @media (min-width: 769px) {
-    .aura-layer-1 { filter: blur(180px); }
-    .aura-layer-2 { filter: blur(144px); }
+    .aura-layer-1 { filter: blur(137px); }
+    .aura-layer-2 { filter: blur(173px); }
+    .aura-layer-3 { filter: blur(187px); }
 }
 
 @keyframes auraDrift1 {
@@ -100,6 +109,11 @@ body {
 @keyframes auraDrift2 {
     0%, 100% { transform: translateZ(0) translate(0, 0) scale(1); }
     50% { transform: translateZ(0) translate(-4%, -3%) scale(1.04); }
+}
+
+@keyframes auraDrift3 {
+    0%, 100% { transform: translateZ(0) translate(0, 0) scale(1); }
+    50% { transform: translateZ(0) translate(-3%, 5%) scale(1.06); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -18,6 +18,14 @@
    rendu si canvas indisponible, coupé sous prefers-reduced-motion.
    ===================================================== */
 document.addEventListener('DOMContentLoaded', function() {
+    // Hotfix : le fondu plein écran (destination-out) + le flou CSS animé
+    // du fond aura cumulés font ramer Firefox (pipeline de compositing
+    // moins optimisé que Chromium sur ces deux effets). On coupe les
+    // particules sur Firefox en attendant une vraie optimisation
+    // (limiter le fondu à une zone, réduire le DPR, capper le framerate...).
+    const isFirefox = typeof navigator !== 'undefined' && /firefox/i.test(navigator.userAgent);
+    if (isFirefox) return;
+
     const canvas = document.getElementById('aura-particles');
     if (!canvas || !canvas.getContext) return;
 
