@@ -3,7 +3,8 @@
 # =====================================================
 # Nginx Alpine pour servir le site statique
 
-FROM nginx:alpine
+# 2026-11-07 : tag figé, branche stable (était nginx:alpine)
+FROM nginx:1.30.6-alpine
 
 # Copier les fichiers du portfolio
 COPY index.html /usr/share/nginx/html/
