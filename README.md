@@ -112,7 +112,7 @@ portfolio/
 │   └── CONTRIBUTING.md    # Guide contribution
 │
 ├── docker-compose.yml     # Config production (VPS)
-├── docker-compose.nexus.yml # Config développement (Nexus)
+├── docker-compose.dev.yml # Config développement local
 ├── Dockerfile             # Image nginx
 └── nginx.conf             # Configuration nginx
 ```
@@ -159,7 +159,7 @@ background: linear-gradient(135deg, #E67451 0%, #5B8DBE 100%);
 - Traefik v3 configuré (pour production)
 - DNS configuré (pour production HTTPS)
 
-### Développement Local (Nexus)
+### Développement Local
 
 ```bash
 # Servir avec Python (test rapide)
@@ -167,8 +167,8 @@ python3 -m http.server 8080
 # Accès: http://localhost:8080
 
 # OU avec Docker Compose
-docker compose -f docker-compose.nexus.yml up -d
-# Accès: http://portfolio.nexus.local
+docker compose -f docker-compose.dev.yml up -d
+# Accès: http://localhost:8080
 ```
 
 ### Production (VPS avec Traefik)
@@ -223,7 +223,7 @@ labels:
 python3 -m http.server 8080
 
 # Méthode 2 : Docker
-docker compose -f docker-compose.nexus.yml up --build
+docker compose -f docker-compose.dev.yml up --build
 
 # Méthode 3 : Live Server (VSCode extension)
 # Clic droit sur index.html → "Open with Live Server"

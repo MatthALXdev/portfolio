@@ -11,11 +11,10 @@
 
 1. [Prérequis](#prérequis)
 2. [Développement Local](#développement-local)
-3. [Environnement Nexus](#environnement-nexus)
-4. [Production VPS](#production-vps)
-5. [Mise à Jour](#mise-à-jour)
-6. [Rollback](#rollback)
-7. [Troubleshooting](#troubleshooting)
+3. [Production VPS](#production-vps)
+4. [Mise à Jour](#mise-à-jour)
+5. [Rollback](#rollback)
+6. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -67,7 +66,7 @@ docker network ls | grep traefik
 **Commandes** :
 ```bash
 # Naviguer vers le projet
-cd /home/matth/nexus/dev-web/portfolio
+cd portfolio
 
 # Démarrer serveur
 python3 -m http.server 8080
@@ -132,72 +131,6 @@ docker logs -f portfolio-local
 # Arrêt & nettoyage
 docker stop portfolio-local
 docker rm portfolio-local
-```
-
----
-
-## 🏠 Environnement Nexus
-
-### Configuration
-
-**Fichier** : `docker-compose.nexus.yml`
-
-**Prérequis** :
-- Traefik v3 déployé sur Nexus
-- Réseau `traefik-network` créé
-- DNS local : `portfolio.nexus.local` → `192.168.1.22` (dans `/etc/hosts`)
-
-### Déploiement
-
-```bash
-# 1. Naviguer vers le projet
-cd /home/matth/nexus/dev-web/portfolio
-
-# 2. Vérifier configuration
-cat docker-compose.nexus.yml
-# → Host(`portfolio.nexus.local`)
-
-# 3. Build & démarrer
-docker compose -f docker-compose.nexus.yml up -d --build
-
-# 4. Vérifier status
-docker compose -f docker-compose.nexus.yml ps
-# → portfolio   running
-
-# 5. Tester accès
-curl -I http://portfolio.nexus.local
-# → HTTP/1.1 200 OK
-```
-
-### Logs & Debugging
-
-```bash
-# Logs en temps réel
-docker compose -f docker-compose.nexus.yml logs -f
-
-# Logs spécifiques (nginx)
-docker exec portfolio tail -f /var/log/nginx/access.log
-docker exec portfolio tail -f /var/log/nginx/error.log
-
-# Inspecter conteneur
-docker inspect portfolio
-
-# Entrer dans le conteneur
-docker exec -it portfolio sh
-# → Alpine shell
-```
-
-### Arrêt
-
-```bash
-# Arrêter sans supprimer
-docker compose -f docker-compose.nexus.yml stop
-
-# Arrêter et supprimer
-docker compose -f docker-compose.nexus.yml down
-
-# Supprimer avec volumes (si applicable)
-docker compose -f docker-compose.nexus.yml down -v
 ```
 
 ---
@@ -351,7 +284,7 @@ http://traefik.devamalix.fr/dashboard/
 ### Mise à Jour Code
 
 **Workflow** :
-1. Push modifications sur GitHub (depuis Nexus)
+1. Push modifications sur GitHub (branche, puis PR)
 2. Pull sur VPS
 3. Rebuild conteneur
 4. Vérification
@@ -644,7 +577,7 @@ docker compose up -d --build
 
 **Avant déploiement** :
 - [ ] Code testé en local (Python server)
-- [ ] Code testé sur Nexus (Docker + Traefik)
+- [ ] Code testé en local (Docker, `docker-compose.dev.yml`)
 - [ ] DNS configuré (A record)
 - [ ] Traefik opérationnel sur VPS
 - [ ] Réseau `traefik-network` existe

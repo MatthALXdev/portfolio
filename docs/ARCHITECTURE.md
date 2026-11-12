@@ -365,46 +365,24 @@ labels:
 
 ## 🌍 Environnements
 
-### 1. Développement Local (Nexus)
+### 1. Développement Local
 
-**Configuration** : `docker-compose.nexus.yml`
+**Configuration** : `docker-compose.dev.yml`
 
-```yaml
-version: '3.8'
+Le conteneur publie le port 8080 et monte le code en volume (pas de Traefik).
 
-networks:
-  traefik-network:
-    external: true
-
-services:
-  portfolio:
-    build: .
-    container_name: portfolio
-    restart: unless-stopped
-    networks:
-      - traefik-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portfolio.rule=Host(`portfolio.nexus.local`)"
-      - "traefik.http.routers.portfolio.entrypoints=web"
-      - "traefik.http.services.portfolio.loadbalancer.server.port=80"
-```
-
-**Accès** :
-- URL : http://portfolio.nexus.local
-- TLS : Non (HTTP uniquement)
-- DNS : Hosts file local (`/etc/hosts`)
+**Accès** : http://localhost:8080
 
 **Commandes** :
 ```bash
 # Build & start
-docker compose -f docker-compose.nexus.yml up -d --build
+docker compose -f docker-compose.dev.yml up -d --build
 
 # Logs
-docker compose -f docker-compose.nexus.yml logs -f
+docker compose -f docker-compose.dev.yml logs -f
 
 # Stop
-docker compose -f docker-compose.nexus.yml down
+docker compose -f docker-compose.dev.yml down
 ```
 
 ---
